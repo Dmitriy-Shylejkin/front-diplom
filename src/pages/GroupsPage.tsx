@@ -18,7 +18,7 @@ const GroupsPage = () => {
           <div
             key={group.id}
             className="group-card"
-            onClick={() => navigate(`/groups/${group.id}/students`)}
+            onClick={() => navigate(`/students/${group.id}`)}
           >
             <div className="group-header">
               <Users size={24} className="group-icon" />

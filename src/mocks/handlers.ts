@@ -223,4 +223,32 @@ export const handlers = [
       ])
     );
   }),
+
+  rest.get('/students', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json([
+        {
+            "id": 8,
+            "fullName": "Димас",
+            "email": "modie8856@gmail.com",
+            "phone": "+78005553535",
+            "groupId": 3,
+            "characteristic": null,
+            "createdAt": "2025-05-15T16:27:34.508Z",
+            "updatedAt": "2025-05-15T16:27:34.508Z",
+        },
+        {
+            "id": 11,
+            "fullName": "Димммммаааа",
+            "email": "dm2584709@gmail.com",
+            "phone": "+78005553534",
+            "groupId": 3,
+            "characteristic": null,
+            "createdAt": "2025-05-16T13:13:10.991Z",
+            "updatedAt": "2025-05-16T13:13:10.991Z",
+        },
+    ])
+    );
+  }),
 ];

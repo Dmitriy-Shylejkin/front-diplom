@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
@@ -6,6 +5,7 @@ import PrivateRoute from './router/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import ProgramsPage from './pages/ProgramsPage';
 import GroupsPage from './pages/GroupsPage';
+import StudentsPage from './pages/StudentsPage';
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
         <Route path="/programs/:facultyId" element={<ProgramsPage />} />
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/groups" element={<GroupsPage />} />
+        <Route path="/students/:groupId" element={<StudentsPage />} />
         <Route path="/dashboard" element={
           <PrivateRoute>
             <DashboardPage />
