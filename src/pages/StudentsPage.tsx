@@ -1,7 +1,7 @@
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import DashboardLayout from '../layout/DashboardLayout';
 import './StudentsPage.css';
-import { Mail, Phone, Calendar, BookOpen, ChevronRight, Users } from 'lucide-react';
+import { Mail, Phone, Calendar, BookOpen, ChevronRight, Users, FileText } from 'lucide-react';
 import { useStudents } from '../mocks/useStudents';
 
 const StudentsPage = () => {
@@ -19,6 +19,18 @@ const StudentsPage = () => {
           СПИСОК СТУДЕНТОВ
         </h1>
         <div className="group-info">Группа: {searchParams.get('groupName') || `ID: ${groupId}`}</div>
+      </div>
+
+      <div className="action-buttons">
+        <button className="email-button">
+          <Mail size={18} className="button-icon" />
+          <span>Отправить email группе</span>
+        </button>
+        
+        <button className="pdf-button">
+          <FileText size={18} className="button-icon" />
+          <span>Выгрузить отчет PDF</span>
+        </button>
       </div>
 
       <div className="students-grid">

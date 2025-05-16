@@ -127,3 +127,50 @@
 .details-button:hover {
   color: #e53935;
 }
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  margin: 0 auto 30px;
+  max-width: 1200px;
+  padding: 0 20px;
+  justify-content: center;
+}
+
+.email-button, .pdf-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 15px;
+}
+
+.email-button {
+  background-color: #e53935;
+  color: white;
+}
+
+.pdf-button {
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+}
+
+.email-button:hover {
+  background-color: #c62828;
+  transform: translateY(-2px);
+}
+
+.pdf-button:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+}
+
+.button-icon {
+  margin-right: 4px;
+}
