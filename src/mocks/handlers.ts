@@ -140,18 +140,86 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json([
-        { id: 'fitu', name: 'Факультет ИТ и управления'},
-        { id: 'fiop', name: 'Факультет инноватики (ФИОП)' },
-        { id: 'mf', name: 'Механический факультет (МФ)' },
-        { id: 'sf', name: 'Строительный факультет (СФ)' },
-        { id: 'enf', name: 'Энергетический факультет (ЭнФ)' },
-        { id: 'ggngd', name: 'Геологии и нефтегазового дела' },
-        { id: 'ifio', name: 'ИФИО' },
-        { id: 'npc', name: 'Колледж ЮРГПУ (НПИ)' },
-        { id: 'vuc', name: 'Военный учебный центр' },
-        { id: 'asiigr', name: 'АСИиГР' },
-        { id: 'ib', name: 'Каф. ИБ' },
-        { id: 'tf', name: 'Технологический факультет' },
+        {
+          "id": 1,
+          "name": "ИСИИ-21-1",
+          "programId": 1,
+          "curatorId": 5,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 2,
+          "name": "ПМиКН-22-2",
+          "programId": 2,
+          "curatorId": 8,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 3,
+          "name": "ЭЭиЭТ-21-3",
+          "programId": 3,
+          "curatorId": 3,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 4,
+          "name": "СУЗиС-23-1",
+          "programId": 4,
+          "curatorId": 12,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 5,
+          "name": "НГД-22-4",
+          "programId": 5,
+          "curatorId": 7,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 6,
+          "name": "МиР-21-2",
+          "programId": 6,
+          "curatorId": 4,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 7,
+          "name": "БИ-23-3",
+          "programId": 7,
+          "curatorId": 9,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 8,
+          "name": "ТМ-22-1",
+          "programId": 8,
+          "curatorId": 6,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 9,
+          "name": "ИБ-21-5",
+          "programId": 9,
+          "curatorId": 10,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        },
+        {
+          "id": 10,
+          "name": "ГиРПИ-23-2",
+          "programId": 10,
+          "curatorId": 11,
+          "createdAt": "2025-05-15T12:06:09.975Z",
+          "updatedAt": "2025-05-15T12:06:09.975Z"
+        }
       ])
     );
   }),

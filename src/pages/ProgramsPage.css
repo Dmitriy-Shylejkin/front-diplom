@@ -1,0 +1,68 @@
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.error {
+  color: #e53935;
+}
+
+.programs-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.program-card {
+  background-color: #222;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #333;
+}
+
+.program-card:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-2px);
+  border-color: #e53935;
+}
+
+.program-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.program-icon {
+  margin-right: 12px;
+  color: #e53935;
+}
+
+.program-name {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: #fff;
+}
+
+.program-arrow {
+  color: #666;
+}
+
+.program-details {
+  display: flex;
+  gap: 20px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

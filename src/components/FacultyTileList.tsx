@@ -26,7 +26,7 @@ const FacultyTileList = () => {
         <div
           key={faculty.id}
           className="tile"
-          onClick={() => navigate(`/groups/${faculty.id}`)}
+          onClick={() => navigate(`/programs/${faculty.id}`)}
         >
           <div className="tile-icon">{icons[index % icons.length]}</div>
           <div className="tile-title">{faculty.name}</div>
