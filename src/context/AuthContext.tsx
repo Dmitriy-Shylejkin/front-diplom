@@ -15,11 +15,13 @@ const AuthContext = createContext<AuthContextProps>({
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  console.log('AuthProvider')
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     localStorage.getItem('isAuthenticated') === 'true'
   );
 
   const login = async (email: string, password: string) => {
+    console.log(123)
     const res = await fetch('/login', {
       method: 'POST',
       headers: {

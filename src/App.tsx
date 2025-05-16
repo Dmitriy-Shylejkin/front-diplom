@@ -3,10 +3,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import PrivateRoute from './router/PrivateRoute';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <BrowserRouter>
+    <AuthProvider children={
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/login" element={<LoginPage />} />
@@ -17,6 +19,7 @@ function App() {
         } />
       </Routes>
     </BrowserRouter>
+    }/>
   );
 }
 
