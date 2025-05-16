@@ -8,7 +8,6 @@ const ProgramsPage = () => {
   const { facultyId } = useParams();
   const navigate = useNavigate();
   const programs = usePrograms('') // TODO: добаить facultyId в usePrograms
-  console.log(programs);
 
   return (
     <DashboardLayout>
@@ -19,7 +18,7 @@ const ProgramsPage = () => {
           <div
             key={program.id}
             className="program-card"
-            onClick={() => navigate(`/programs/${program.id}/groups`)}
+            onClick={() => navigate(`/groups`)}
           >
             <div className="program-header">
               <GraduationCap size={24} className="program-icon" />

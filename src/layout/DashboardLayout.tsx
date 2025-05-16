@@ -15,7 +15,9 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
   return (
     <div className="layout-container">
       <header className="layout-header">
-        <img src="/logo_curator.png" alt="Logo" className="logo" />
+        <button onClick={() => navigate('/dashboard')} className='logo-button'>
+          <img src="/logo_curator.png" alt="Logo" className="logo" />
+        </button>
         <button onClick={handleLogout} className="logout-button">
           Выйти
         </button>

@@ -1,0 +1,68 @@
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.error {
+  color: #e53935;
+}
+
+.groups-list {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.group-card {
+  background-color: #222;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid #333;
+}
+
+.group-card:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-2px);
+  border-color: #e53935;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.group-icon {
+  margin-right: 12px;
+  color: #e53935;
+}
+
+.group-name {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  color: #fff;
+}
+
+.group-arrow {
+  color: #666;
+}
+
+.group-details {
+  display: flex;
+  gap: 20px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}

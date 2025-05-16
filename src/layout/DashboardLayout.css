@@ -18,6 +18,12 @@
   height: 40px;
 }
 
+.logo-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .logout-button {
   background-color: #333;
   color: white;

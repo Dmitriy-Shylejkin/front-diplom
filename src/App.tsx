@@ -5,6 +5,7 @@ import DashboardPage from './pages/DashboardPage';
 import PrivateRoute from './router/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 import ProgramsPage from './pages/ProgramsPage';
+import GroupsPage from './pages/GroupsPage';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/programs/:facultyId" element={<ProgramsPage />} />
+        <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/groups" element={<GroupsPage />} />
         <Route path="/dashboard" element={
           <PrivateRoute>
             <DashboardPage />
