@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #0e0e0e, #1b1b1b);
+  color: white;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  padding: 4px 8px;
+  border-top: 1px solid #e63946;
+  border-bottom: 1px solid #e63946;
+  display: inline-block;
+}

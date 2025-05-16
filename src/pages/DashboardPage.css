@@ -1,0 +1,23 @@
+.dashboard-page {
+  padding-top: 80px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+  position: relative;
+  margin-bottom: 48px;
+}
+
+.page-title::before,
+.page-title::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 2px;
+  background-color: #e53935;
+  margin: 0 16px;
+  vertical-align: middle;
+}

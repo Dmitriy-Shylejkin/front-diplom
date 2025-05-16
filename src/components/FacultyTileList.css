@@ -1,0 +1,29 @@
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.tile {
+  background-color: #222;
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+  border: 1px solid transparent;
+}
+
+.tile:hover {
+  background-color: #e63946;
+  transform: scale(1.03);
+}
+
+.tile-icon {
+  margin-bottom: 12px;
+}
+
+.tile-title {
+  font-weight: 500;
+  font-size: 16px;
+}
