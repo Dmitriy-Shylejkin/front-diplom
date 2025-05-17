@@ -22,7 +22,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const login = async (email: string, password: string) => {
-    const res = await fetch(`${BACKEND_URL}/auth/login`, {
+    console.log(123)
+    const res = await fetch('http://localhost:4000/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -47,8 +47,8 @@ const CreateCuratorPage = () => {
       }
 
       navigate('/curators'); // Перенаправление после успешного создания
-    } catch (err) {
-      setError(err.message || 'Произошла ошибка');
+    } catch (err: any) {
+      setError(err?.message.toString() || 'Произошла ошибка');
     } finally {
       setIsSubmitting(false);
     }
