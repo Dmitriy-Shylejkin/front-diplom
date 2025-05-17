@@ -6,6 +6,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProgramsPage from './pages/ProgramsPage';
 import GroupsPage from './pages/GroupsPage';
 import StudentsPage from './pages/StudentsPage';
+import StudentDetailsPage from './pages/StudentDetailsPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/groups" element={<GroupsPage />} />
         <Route path="/students/:groupId" element={<StudentsPage />} />
+        <Route path="/student/:studentId" element={<StudentDetailsPage />} />
         <Route path="/dashboard" element={
           <PrivateRoute>
             <DashboardPage />

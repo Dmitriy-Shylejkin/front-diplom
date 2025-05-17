@@ -224,7 +224,31 @@ export const handlers = [
     );
   }),
 
+  rest.get('/students/1', (req, res, ctx) => {
+    console.log(11)
+    const { studentId } = req.params;
+    const id = Number(studentId);
+    
+    console.log(`Fetching student with ID: ${id}`); // Для отладки
+    return res(
+      ctx.status(200),
+      ctx.json(
+        {
+            "id": 8,
+            "fullName": "Димас",
+            "email": "modie8856@gmail.com",
+            "phone": "+78005553535",
+            "groupId": 3,
+            "characteristic": null,
+            "createdAt": "2025-05-15T16:27:34.508Z",
+            "updatedAt": "2025-05-15T16:27:34.508Z",
+        },
+      )
+    );
+  }),
+
   rest.get('/students', (req, res, ctx) => {
+    console.log('students')
     return res(
       ctx.status(200),
       ctx.json([

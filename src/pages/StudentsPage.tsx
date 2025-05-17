@@ -70,7 +70,7 @@ const StudentsPage = () => {
             
             <button 
               className="details-button"
-              onClick={() => navigate(`/students/${student.id}`)}
+              onClick={() => navigate(`/student/${student.id}`)}
             >
               <ChevronRight size={20} />
             </button>

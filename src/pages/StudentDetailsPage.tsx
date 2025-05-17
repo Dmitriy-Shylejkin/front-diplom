@@ -2,39 +2,39 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import DashboardLayout from '../layout/DashboardLayout';
-import { Mail, Phone, Calendar, BookOpen, ChevronRight, Users, FileText, Edit, List, Check, X } from 'lucide-react';
+import { Mail, Phone, Calendar, BookOpen, Users, FileText, Edit, List, Check, X } from 'lucide-react';
 import './StudentDetailsPage.css';
+import { useStudentDetail } from '../mocks/useStudentDetail';
 
 const StudentDetailsPage = () => {
   const { studentId } = useParams();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   
-  // Mock данные студента (в реальном приложении нужно загружать через API)
-  const [student, setStudent] = useState({
-    id: 11,
-    fullName: "Шулейкин Дмитрий Русланович",
-    email: "dima.fix@bk.ru",
-    phone: "+79283732249",
-    groupId: 3,
-    characteristic: "Студент способный но ленивый",
-    createdAt: "2025-05-16T13:13:10.991Z",
-    group: {
-      id: 3,
-      name: "АИСб-о21",
-    }
-  });
+  // const student: any = useStudentDetail(studentId || '') 
+  const student = {
+    "id": 8,
+    "fullName": "Димас",
+    "email": "modie8856@gmail.com",
+    "phone": "+78005553535",
+    "groupId": 3,
+    "characteristic": "null",
+    "createdAt": "2025-05-15T16:27:34.508Z",
+    "updatedAt": "2025-05-15T16:27:34.508Z",
+  }
+
+  console.log('studentDetail: ', student)
 
   const [editData, setEditData] = useState({...student});
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setEditData(prev => ({...prev, [name]: value}));
+    // setEditData(prev => ({...prev, [name]: value}));
   };
 
   const saveChanges = () => {
     // Здесь должен быть вызов API для сохранения изменений
-    setStudent(editData);
+    // setStudent(editData); //TODO: добавить сохранение студентов
     setIsEditing(false);
   };
 
@@ -44,18 +44,15 @@ const StudentDetailsPage = () => {
   };
 
   const handleSendEmail = () => {
-    // Логика отправки email
-    window.location.href = `mailto:${student.email}`;
+    // TODO: Логика отправки email добавть
   };
 
   const handleGenerateReport = () => {
-    // Логика генерации отчета
-    alert(`Генерация отчета для студента ${student.fullName}`);
+    // TODO: Логика генерации отчета добавить
   };
 
   const handleViewGrades = () => {
-    // Переход к просмотру оценок
-    navigate(`/students/${studentId}/grades`);
+    // TODO: Переход к просмотру оценок
   };
 
   return (
@@ -80,7 +77,7 @@ const StudentDetailsPage = () => {
             {!isEditing ? (
               <>
                 <h2 className="student-name">{student.fullName}</h2>
-                <div className="student-group">Группа: {student.group.name}</div>
+                <div className="student-group">Группа: {student.groupId}</div>
               </>
             ) : (
               <>
@@ -91,7 +88,7 @@ const StudentDetailsPage = () => {
                   onChange={handleEditChange}
                   className="edit-input"
                 />
-                <div className="student-group">Группа: {student.group.name}</div>
+                <div className="student-group">Группа: {student.groupId}</div>
               </>
             )}
           </div>
