@@ -42,6 +42,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setIsAuthenticated(true);
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('token', data.access_token); // если нужно в будущем
+    // localStorage.setItem()
   };
 
   const logout = () => {

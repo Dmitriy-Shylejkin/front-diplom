@@ -6,6 +6,7 @@ import './DashboardLayout.css';
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const role = localStorage.getItem('role')
 
   const handleLogout = () => {
     logout();
@@ -18,6 +19,10 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
         <button onClick={() => navigate('/dashboard')} className='logo-button'>
           <img src="/logo_curator.png" alt="Logo" className="logo" />
         </button>
+        {role === 'admin' ? 
+        <button onClick={() => navigate('/curators')} className='curators-button'>Кураторы</button>
+        : <></>
+        }
         <button onClick={handleLogout} className="logout-button">
           Выйти
         </button>
