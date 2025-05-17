@@ -7,7 +7,7 @@ export const useStudents = (groupId: string | undefined = undefined) => {
   query = groupId ? query + `groupId=${groupId}` : query + ''
 
   useEffect(() => {
-    fetch(`http://localhost:4000/students/?${query}`, {
+    fetch(`${BACKEND_URL}/students/?${query}`, {
       headers: {
         'Accept': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}` || ''

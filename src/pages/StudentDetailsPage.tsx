@@ -38,6 +38,9 @@ const StudentDetailsPage = () => {
     characteristic: ''
   });
 
+  const [showReportDialog, setShowReportDialog] = useState(false);
+  const [isGeneratingReport, setIsGeneratingReport] = useState(false);
+
   useEffect(() => {
     fetch(`${BACKEND_URL}/students/${studentId}`, {
       headers: {
@@ -90,9 +93,33 @@ const StudentDetailsPage = () => {
     window.location.href = `mailto:${student.email}`;
   };
 
-  const handleGenerateReport = () => {
-    // TODO: Реализовать генерацию отчета
-    console.log('Генерация отчета для студента:', studentId);
+  const handleGenerateReport = async () => {
+    setIsGeneratingReport(true);
+    try {
+      const response = await fetch(`${BACKEND_URL}/curators/report/${studentId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+        }
+      });
+      
+      if (!response.ok) throw new Error('Failed to generate report');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `student_${studentId}_report.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      
+      setShowReportDialog(false);
+    } catch (error) {
+      console.error('Error generating report:', error);
+      alert('Ошибка при генерации отчета');
+    } finally {
+      setIsGeneratingReport(false);
+    }
   };
 
   const handleViewGrades = () => {
@@ -235,7 +262,10 @@ const StudentDetailsPage = () => {
                 <Mail size={16} />
                 Отправить email
               </button>
-              <button className="action-button" onClick={handleGenerateReport}>
+              <button 
+                className="action-button" 
+                onClick={() => setShowReportDialog(true)}
+              >
                 <FileText size={16} />
                 Создать отчет
               </button>
@@ -254,6 +284,43 @@ const StudentDetailsPage = () => {
           )}
         </div>
       </div>
+
+      {/* Диалоговое окно создания отчета */}
+      {showReportDialog && (
+        <div className="report-dialog-overlay">
+          <div className="report-dialog">
+            <button 
+              className="close-dialog"
+              onClick={() => setShowReportDialog(false)}
+            >
+              <X size={20} />
+            </button>
+            
+            <h3>Создание отчета</h3>
+            <p>Будет создан отчет по всем оценкам студента:</p>
+            <div className="student-info-report">
+              <div><strong>ФИО:</strong> {student.fullName}</div>
+              <div><strong>Группа:</strong> {student.groupId}</div>
+            </div>
+            
+            <div className="dialog-buttons">
+              <button 
+                className="cancel-button"
+                onClick={() => setShowReportDialog(false)}
+              >
+                Отмена
+              </button>
+              <button 
+                className="generate-button"
+                onClick={handleGenerateReport}
+                disabled={isGeneratingReport}
+              >
+                {isGeneratingReport ? 'Создание...' : 'Создать отчет'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </DashboardLayout>
   );
 };

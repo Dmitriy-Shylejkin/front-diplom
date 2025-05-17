@@ -60,7 +60,7 @@ const StudentsPage = () => {
 
   const deleteStudent = async (studentId: string) => {
     try {
-      await fetch(`http://localhost:4000/students/${studentId}`, {
+      await fetch(`${BACKEND_URL}/students/${studentId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
@@ -82,7 +82,7 @@ const StudentsPage = () => {
           datetime: emailData.time
         }
       }
-      await fetch(`http://localhost:4000/email/send-group`, {
+      await fetch(`${BACKEND_URL}/email/send-group`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -157,7 +157,7 @@ const StudentsPage = () => {
   useEffect(() => {
     let query = '';
     query = groupId ? query + `groupId=${groupId}` : query + '';
-    fetch(`http://localhost:4000/students/?${query}`, {
+    fetch(`${BACKEND_URL}/students/?${query}`, {
       headers: {
         'Accept': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
@@ -167,7 +167,7 @@ const StudentsPage = () => {
       .then(setAllStudents)
       .catch(console.error);
 
-    fetch(`http://localhost:4000/subjects`, {
+    fetch(`${BACKEND_URL}/subjects`, {
       headers: {
         'Accept': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
