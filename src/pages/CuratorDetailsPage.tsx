@@ -359,13 +359,6 @@ const CuratorDetailsPage = () => {
                 Добавить группу
               </button>
               <button 
-                className="action-button" 
-                onClick={() => setIsEmailModalOpen(true)}
-              >
-                <Mail size={16} />
-                Отправить email
-              </button>
-              <button 
                 className="action-button danger" 
                 onClick={deleteCurator}
               >
