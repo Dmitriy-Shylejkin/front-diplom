@@ -5,6 +5,7 @@ import './StudentsPage.css';
 import { Mail, Phone, Calendar, BookOpen, ChevronRight, Users, FileText, Plus, X } from 'lucide-react';
 import { createStudent, useStudents } from '../mocks/useStudents';
 import { context } from 'msw';
+import { BACKEND_URL } from '../constants';
 
 const StudentsPage = () => {
   const { groupId } = useParams();
@@ -26,6 +27,9 @@ const StudentsPage = () => {
     type: 'test',
     time: ''
   });
+  const [selectedSubject, setSelectedSubject] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showReportDialog, setShowReportDialog] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -114,6 +118,42 @@ const StudentsPage = () => {
     await sendEmailGroup();
   };
 
+  const handleGenerateReport = async () => {
+    if (!selectedSubject) {
+      alert('Пожалуйста, выберите предмет');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${BACKEND_URL}/curators/group-report/${groupId}/${selectedSubject}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+        }
+      });
+      
+      if (!response.ok) throw new Error('Failed to generate report');
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `report_group_${groupId}_subject_${selectedSubject}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      
+      // Закрываем диалог после успешного создания
+      setShowReportDialog(false);
+    } catch (error) {
+      console.error('Error generating report:', error);
+      alert('Ошибка при генерации отчета');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     let query = '';
     query = groupId ? query + `groupId=${groupId}` : query + '';
@@ -157,7 +197,9 @@ const StudentsPage = () => {
           <span>Отправить email группе</span>
         </button>
         
-        <button className="pdf-button">
+        <button className="pdf-button"
+          onClick={() => setShowReportDialog(true)}
+        >
           <FileText size={18} className="button-icon" />
           <span>Выгрузить отчет</span>
         </button>
@@ -291,6 +333,60 @@ const StudentsPage = () => {
                 <button type="submit">Отправить</button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+{showReportDialog && (
+        <div className="report-dialog-overlay">
+          <div className="report-dialog">
+            <button 
+              className="close-dialog"
+              onClick={() => {
+                setShowReportDialog(false);
+                setSelectedSubject(null);
+              }}
+            >
+              <X size={20} />
+            </button>
+            
+            <h3>Создание отчета</h3>
+            <p>Выберите предмет для формирования отчета:</p>
+            
+            <select 
+              className="subject-select"
+              value={selectedSubject || ''}
+              onChange={(e) => {
+                const value = e.target.value;
+                setSelectedSubject(value ? Number(value) : null);
+              }}
+            >
+              <option value="">Выберите предмет</option>
+              {allSubjects.map((subject: any) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.name}
+                </option>
+              ))}
+            </select>
+            
+            <div className="dialog-buttons">
+              <button 
+                className="cancel-button"
+                onClick={() => {
+                  setShowReportDialog(false);
+                  setSelectedSubject(null);
+                }}
+              >
+                Отмена
+              </button>
+              <button 
+                className="generate-button"
+                onClick={handleGenerateReport}
+                disabled={!selectedSubject || isLoading}
+              >
+                {isLoading ? 'Создание...' : 'Создать отчет'}
+              </button>
+            </div>
           </div>
         </div>
       )}
