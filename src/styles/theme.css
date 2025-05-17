@@ -14,3 +14,30 @@ body {
   border-bottom: 1px solid #e63946;
   display: inline-block;
 }
+
+.prohor {
+  color: rgba(21, 21, 21, 0.086);
+  text-align: center;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+
+.prohor:hover {
+  transform: scale(1.05);
+}
+
+.prohor-image {
+  margin: 20px auto;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  width: 200px;
+  transition: width 5s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.prohor-image.expanding {
+  width: 100%;
+}
+
