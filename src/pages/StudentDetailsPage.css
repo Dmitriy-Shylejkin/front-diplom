@@ -1,0 +1,182 @@
+/* StudentDetailsPage.css */
+.student-header {
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.title-icon {
+  vertical-align: middle;
+  margin-right: 12px;
+  color: #e53935;
+}
+
+.back-link {
+  margin-top: 10px;
+  color: #aaa;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.back-link:hover {
+  color: #e53935;
+}
+
+.student-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.student-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.student-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #e53935;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25px;
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  flex-shrink: 0;
+}
+
+.student-info {
+  flex-grow: 1;
+}
+
+.student-name {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.student-group {
+  margin-top: 5px;
+  color: #bbb;
+  font-size: 16px;
+}
+
+.student-details {
+  background: linear-gradient(145deg, #2a2a2a, #222);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.detail-section {
+  margin-bottom: 25px;
+}
+
+.detail-section:last-child {
+  margin-bottom: 0;
+}
+
+.detail-section h3 {
+  color: white;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 8px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #ddd;
+  font-size: 15px;
+}
+
+.detail-item svg {
+  color: #e53935;
+  flex-shrink: 0;
+}
+
+.no-characteristic {
+  color: #888;
+  font-style: italic;
+}
+
+.student-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 15px;
+  background-color: #333;
+  color: white;
+}
+
+.action-button:hover {
+  background-color: #444;
+  transform: translateY(-2px);
+}
+
+.action-button svg {
+  margin-right: 4px;
+}
+
+.action-button.save {
+  background-color: #2e7d32;
+}
+
+.action-button.save:hover {
+  background-color: #1b5e20;
+}
+
+.action-button.cancel {
+  background-color: #c62828;
+}
+
+.action-button.cancel:hover {
+  background-color: #b71c1c;
+}
+
+.edit-input {
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: white;
+  font-size: 15px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.edit-textarea {
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 4px;
+  padding: 12px;
+  color: white;
+  font-size: 15px;
+  width: 100%;
+  resize: vertical;
+  min-height: 100px;
+}
