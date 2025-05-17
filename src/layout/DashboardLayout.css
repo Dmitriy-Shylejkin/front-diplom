@@ -51,6 +51,22 @@
   background-color: #e63946;
 }
 
+.profile-button {
+  background-color: #e6394760;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.5s;
+  /* margin-left: auto; */
+  margin-right: 15px;
+}
+
+.profile-button:hover {
+  background-color: #e63946;
+}
+
 .logout-button:hover {
   background-color: #e63946;
 }

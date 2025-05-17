@@ -1,28 +1,59 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { BACKEND_URL } from '../constants';
 
+interface UserData {
+  id: number;
+  role: string;
+  email: string;
+  // другие поля по необходимости
+}
+
 interface AuthContextProps {
   isAuthenticated: boolean;
+  user: UserData | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  fetchUserData: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextProps>({
+  user: null,
   isAuthenticated: false,
   login: async () => {},
   logout: () => {},
+  fetchUserData: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  console.log('AuthProvider')
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     localStorage.getItem('isAuthenticated') === 'true'
   );
+  const [user, setUser] = useState<UserData | null>(null);
+
+  const fetchUserData = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    try {
+      const res = await fetch(`${BACKEND_URL}/auth/profile`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!res.ok) throw new Error('Failed to fetch user data');
+      
+      const userData = await res.json();
+      setUser(userData);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      logout();
+    }
+  };
 
   const login = async (email: string, password: string) => {
-    console.log(123)
     const res = await fetch(`${BACKEND_URL}/auth/login`, {
       method: 'POST',
       headers: {
@@ -37,22 +68,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const data = await res.json();
-    console.log('[LOGIN SUCCESS]:', data);
-
-    setIsAuthenticated(true);
+    console.log(data)
     localStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('token', data.access_token); // если нужно в будущем
-    // localStorage.setItem()
+
+    localStorage.setItem('token', data.access_token);
+    localStorage.setItem('role', data.role)
+    setIsAuthenticated(true);
+    await fetchUserData();
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    setUser(null);
     localStorage.removeItem('isAuthenticated');
     localStorage.removeItem('token');
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, fetchUserData }}>
       {children}
     </AuthContext.Provider>
   );

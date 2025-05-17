@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import FacultyTileList from '../components/FacultyTileList';
 import DashboardLayout from '../layout/DashboardLayout';
+import  './DashboardPage.css';
 import '../styles/theme.css';
+import { Link } from 'react-router-dom';
 
 const DashboardPage = () => {
   const [showImage, setShowImage] = useState(false);
@@ -18,7 +20,10 @@ const DashboardPage = () => {
 
   return (
     <DashboardLayout>
-      <h1 className="section-title">ФАКУЛЬТЕТЫ</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h1 className="section-title">ФАКУЛЬТЕТЫ</h1>
+      </div>
+      
       <FacultyTileList />
       <h1 
         className="prohor" 

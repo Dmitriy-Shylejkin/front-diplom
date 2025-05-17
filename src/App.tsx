@@ -9,6 +9,7 @@ import StudentsPage from './pages/StudentsPage';
 import StudentDetailsPage from './pages/StudentDetailsPage';
 import StudentsGragesPage from  './pages/StudentsGragesPage'
 import CuratorsPage from './pages/CuratorsPage';
+import CuratorProfilePage from './pages/CuratorProfilePage';
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
             <DashboardPage />
           </PrivateRoute>
         } />
+        <Route path="/profile" element={
+            <PrivateRoute>
+              <CuratorProfilePage />
+            </PrivateRoute>
+          } />
       </Routes>
     </BrowserRouter>
     }/>

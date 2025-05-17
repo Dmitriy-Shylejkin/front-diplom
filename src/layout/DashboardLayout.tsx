@@ -23,6 +23,7 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
         <button onClick={() => navigate('/curators')} className='curators-button'>Кураторы</button>
         : <></>
         }
+        <button className="profile-button" onClick={() => navigate('/profile')}>Личный кабинет</button>
         <button onClick={handleLogout} className="logout-button">
           Выйти
         </button>
