@@ -16,10 +16,13 @@ interface StudentData {
 }
 
 const StudentDetailsPage = () => {
+  const { groupId } = useParams();
   const { studentId } = useParams();
   const navigate = useNavigate();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [allSubjects, setAllSubjects] = useState([]);
   const [editData, setEditData] = useState<StudentData>({
     fullName: '',
     groupId: '',
@@ -27,6 +30,12 @@ const StudentDetailsPage = () => {
     phone: '',
     createdAt: '',
     characteristic: ''
+  });
+  const [emailData, setEmailData] = useState({
+    studentId: studentId || '',
+    subject: '',
+    type: 'test',
+    time: ''
   });
 
   const [student, setStudent] = useState({
@@ -54,6 +63,16 @@ const StudentDetailsPage = () => {
         setEditData({...data})
       })
       .catch(console.error);
+
+      fetch(`${BACKEND_URL}/subjects`, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+        },
+      })
+        .then((res) => res.json())
+        .then(setAllSubjects)
+        .catch(console.error);
   }, [studentId]);
 
 
@@ -89,10 +108,6 @@ const StudentDetailsPage = () => {
     setIsEditing(false);
   };
 
-  const handleSendEmail = () => {
-    window.location.href = `mailto:${student.email}`;
-  };
-
   const handleGenerateReport = async () => {
     setIsGeneratingReport(true);
     try {
@@ -120,6 +135,49 @@ const StudentDetailsPage = () => {
     } finally {
       setIsGeneratingReport(false);
     }
+  };
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await sendEmailStudent();
+  };
+
+  const sendEmailStudent = async () => {
+    try {
+      const body = {
+        studentId: Number(studentId),
+        templateKey: emailData.type === "Напоминание о тесте" ? "TEST_REMINDER" : "EXAM_REMINDER",
+        context: {
+          subject: emailData.subject,
+          datetime: emailData.time
+        }
+      }
+      await fetch(`${BACKEND_URL}/email/send-student`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+        },
+        body: JSON.stringify(body)
+      });
+      setIsEmailModalOpen(false);
+      setEmailData({
+        studentId: studentId || '',
+        subject: '',
+        type: 'test',
+        time: ''
+      });
+    } catch (err) {
+      console.error('Ошибка при отправке email:', err);
+    }
+  };
+
+  const handleEmailInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setEmailData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleViewGrades = () => {
@@ -258,7 +316,7 @@ const StudentDetailsPage = () => {
                 <List size={16} />
                 Ведомость оценок
               </button>
-              <button className="action-button" onClick={handleSendEmail}>
+              <button className="action-button" onClick={() => setIsEmailModalOpen(true)} >
                 <Mail size={16} />
                 Отправить email
               </button>
@@ -318,6 +376,72 @@ const StudentDetailsPage = () => {
                 {isGeneratingReport ? 'Создание...' : 'Создать отчет'}
               </button>
             </div>
+          </div>
+        </div>
+      )}
+       {/* Модалка отправки email */}
+       {isEmailModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Отправить email группе</h2>
+            <form onSubmit={handleEmailSubmit}>
+              <div className="form-group">
+                <label>ID cтудента:</label>
+                <input
+                  type="text"
+                  name="groupId"
+                  value={emailData.studentId}
+                  readOnly
+                  disabled
+                />
+              </div>
+              
+              <div className="form-group">
+                <label>Тип напоминания:</label>
+                <select
+                  name="type"
+                  value={emailData.type}
+                  onChange={handleEmailInputChange}
+                  required
+                >
+                  <option value="test">Напоминание о тесте</option>
+                  <option value="exam">Напоминание о экзамене</option>
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <label>Предмет:</label>
+                <select
+                  name="subject"
+                  value={emailData.subject}
+                  onChange={handleEmailInputChange}
+                  required
+                >
+                  <option value="">Выберите предмет</option>
+                  {allSubjects.map((subject: any) => (
+                    <option key={subject.id} value={subject.name}>{subject.name}</option>
+                  ))}
+                </select>
+              </div>
+              
+              <div className="form-group">
+                <label>Время:</label>
+                <input
+                  type="datetime-local"
+                  name="time"
+                  value={emailData.time}
+                  onChange={handleEmailInputChange}
+                  required
+                />
+              </div>
+              
+              <div className="modal-actions">
+                <button type="button" onClick={() => setIsEmailModalOpen(false)}>
+                  Отмена
+                </button>
+                <button type="submit">Отправить</button>
+              </div>
+            </form>
           </div>
         </div>
       )}
