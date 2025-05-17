@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import DashboardLayout from '../layout/DashboardLayout';
 import { Mail, Phone, Calendar, BookOpen, Users, FileText, Edit, List, Check, X } from 'lucide-react';
 import './StudentDetailsPage.css';
-import { useStudentDetail } from '../mocks/useStudentDetail';
+import { BACKEND_URL } from '../constants';
 
 interface StudentData {
   fullName: string;
@@ -19,7 +19,6 @@ const StudentDetailsPage = () => {
   const { studentId } = useParams();
   const navigate = useNavigate();
 
-  const student = useStudentDetail(studentId || "") as StudentData;
   const [isEditing, setIsEditing] = useState(false);
   const [editData, setEditData] = useState<StudentData>({
     fullName: '',
@@ -30,20 +29,53 @@ const StudentDetailsPage = () => {
     characteristic: ''
   });
 
-  // Инициализация editData при загрузке student
+  const [student, setStudent] = useState({
+    fullName: '',
+    groupId: '',
+    email: '',
+    phone: '',
+    createdAt: '',
+    characteristic: ''
+  });
+
   useEffect(() => {
-    if (student && Object.keys(student).length > 0) {
-      setEditData({...student});
-    }
-  }, [student]);
+    fetch(`${BACKEND_URL}/students/${studentId}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setStudent(data)
+        setEditData({...data})
+      })
+      .catch(console.error);
+  }, [studentId]);
+
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setEditData(prev => ({...prev, [name]: value}));
   };
 
-  const saveChanges = () => {
-    // TODO: Реализовать вызов API для сохранения изменений
+  const saveChanges = async () => {
+    const data = JSON.stringify(editData)
+    console.log('ed', editData)
+    await fetch(`${BACKEND_URL}/students/${studentId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+      },
+      body: data
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      setStudent(data)
+      setEditData({...data})
+    })
+    .catch(console.error);
     console.log('Сохранение данных:', editData);
     setIsEditing(false);
     // Здесь должен быть fetch/PUT запрос к API

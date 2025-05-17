@@ -7,7 +7,12 @@ export const useStudents = (groupId: string | undefined = undefined) => {
   query = groupId ? query + `groupId=${groupId}` : query + ''
 
   useEffect(() => {
-    fetch(`http://localhost:4000/students/?${query}`)
+    fetch(`http://localhost:4000/students/?${query}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+      },
+    })
       .then((res) => res.json())
       .then(setStudents)
       .catch(console.error);
@@ -20,10 +25,11 @@ export const useStudents = (groupId: string | undefined = undefined) => {
 export const createStudent = async (newStudent: any) => {
   try {
     console.log('dasdasdaddsad', localStorage.getItem('token'))
-    const response = await fetch('http://192.168.1.68:4000/faculties', {
+    const response = await fetch('http://192.168.1.68:4000/students', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
       },
       body: JSON.stringify(newStudent),
     });
