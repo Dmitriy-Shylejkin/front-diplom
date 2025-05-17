@@ -123,7 +123,7 @@ const StudentDetailsPage = () => {
   };
 
   const handleViewGrades = () => {
-    navigate(`/students/${studentId}/grades`);
+    navigate(`/student/grades/${studentId}`);
   };
 
   if (!studentId) {

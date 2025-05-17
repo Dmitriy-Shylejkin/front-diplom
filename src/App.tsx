@@ -7,6 +7,7 @@ import ProgramsPage from './pages/ProgramsPage';
 import GroupsPage from './pages/GroupsPage';
 import StudentsPage from './pages/StudentsPage';
 import StudentDetailsPage from './pages/StudentDetailsPage';
+import StudentsGragesPage from  './pages/StudentsGragesPage'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/groups" element={<GroupsPage />} />
         <Route path="/students/:groupId" element={<StudentsPage />} />
         <Route path="/student/:studentId" element={<StudentDetailsPage />} />
+        <Route path="/student/grades/:studentId" element={<StudentsGragesPage />} />
         <Route path="/dashboard" element={
           <PrivateRoute>
             <DashboardPage />

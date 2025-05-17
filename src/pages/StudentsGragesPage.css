@@ -1,0 +1,163 @@
+.grades-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  
+  .title-icon {
+    vertical-align: middle;
+    margin-right: 12px;
+    color: #e53935;
+  }
+  
+  .student-info {
+    margin-top: 10px;
+    color: #aaa;
+    font-size: 16px;
+  }
+  
+  .grades-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .grades-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .grade-card {
+    background: linear-gradient(145deg, #2a2a2a, #222);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .grade-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .grade-subject {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    font-size: 16px;
+  }
+  
+  .subject-icon {
+    color: #e53935;
+  }
+  
+  .grade-value-container,
+  .grade-edit-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 20px;
+  }
+  
+  .grade-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  .grade-отлично {
+    background-color: #2e7d32;
+    color: white;
+  }
+  
+  .grade-хорошо {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .grade-удовлетворительно {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .grade-зачет {
+    background-color: #2196f3;
+    color: white;
+  }
+  
+  .grade-незачет {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .grade-date {
+    color: #bbb;
+    font-size: 14px;
+  }
+  
+  .grade-select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+    font-size: 14px;
+  }
+  
+  .edit-button,
+  .save-button,
+  .cancel-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #bbb;
+    transition: color 0.2s;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .edit-button:hover {
+    color: #2196f3;
+    background-color: rgba(33, 150, 243, 0.1);
+  }
+  
+  .save-button:hover {
+    color: #4caf50;
+    background-color: rgba(76, 175, 80, 0.1);
+  }
+  
+  .cancel-button:hover {
+    color: #f44336;
+    background-color: rgba(244, 67, 54, 0.1);
+  }
+  
+  .loading-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 50px auto;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #e53935;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .error-message {
+    text-align: center;
+    padding: 40px;
+    color: #e53935;
+    font-size: 18px;
+  }
