@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BACKEND_URL } from '../constants';
 
 export const useGroups = (programId: string | undefined = undefined, curatorId: string | undefined = undefined) => {
   const [groups, setGroups] = useState<any[]>([]);
@@ -7,7 +8,12 @@ export const useGroups = (programId: string | undefined = undefined, curatorId: 
   query = curatorId ? query + `curatorId=${curatorId}` : query + '';
 
   useEffect(() => {
-    fetch(`/groups/?${query}`)
+    fetch(`${BACKEND_URL}/groups?${query}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}` || ''
+      },
+    })
       .then((res) => res.json())
       .then(setGroups)
       .catch(console.error);

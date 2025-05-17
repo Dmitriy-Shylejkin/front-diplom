@@ -3,7 +3,6 @@ import { rest } from 'msw';
 export const handlers = [
   rest.post('/login', async (req, res, ctx) => {
     const { email, password } = await req.json();
-    console.log('fdffafdaff')
 
     if (email === 'admin@example.com' && password === 'admin') {
       return res(
@@ -225,11 +224,9 @@ export const handlers = [
   }),
 
   rest.get('/students/1', (req, res, ctx) => {
-    console.log(11)
     const { studentId } = req.params;
     const id = Number(studentId);
     
-    console.log(`Fetching student with ID: ${id}`); // Для отладки
     return res(
       ctx.status(200),
       ctx.json(
@@ -248,7 +245,6 @@ export const handlers = [
   }),
 
   rest.get('/students', (req, res, ctx) => {
-    console.log('students')
     return res(
       ctx.status(200),
       ctx.json([

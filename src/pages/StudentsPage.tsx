@@ -9,7 +9,7 @@ const StudentsPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const students = useStudents(); // TODO: добавить groupId в useStudents
+  const students = useStudents(groupId); // TODO: добавить groupId в useStudents
 
   return (
     <DashboardLayout>

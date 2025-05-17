@@ -11,19 +11,7 @@ const StudentDetailsPage = () => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   
-  // const student: any = useStudentDetail(studentId || '') 
-  const student = {
-    "id": 8,
-    "fullName": "Димас",
-    "email": "modie8856@gmail.com",
-    "phone": "+78005553535",
-    "groupId": 3,
-    "characteristic": "null",
-    "createdAt": "2025-05-15T16:27:34.508Z",
-    "updatedAt": "2025-05-15T16:27:34.508Z",
-  }
-
-  console.log('studentDetail: ', student)
+  const student: any = useStudentDetail(studentId || '') 
 
   const [editData, setEditData] = useState({...student});
 

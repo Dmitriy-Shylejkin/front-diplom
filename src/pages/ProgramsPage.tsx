@@ -7,7 +7,7 @@ import { usePrograms } from '../mocks/usePrograms';
 const ProgramsPage = () => {
   const { facultyId } = useParams();
   const navigate = useNavigate();
-  const programs = usePrograms('') // TODO: добаить facultyId в usePrograms
+  const programs = usePrograms(facultyId) // TODO: добаить facultyId в usePrograms
 
   return (
     <DashboardLayout>
@@ -18,7 +18,7 @@ const ProgramsPage = () => {
           <div
             key={program.id}
             className="program-card"
-            onClick={() => navigate(`/groups`)}
+            onClick={() => navigate(`/groups/${program.id}`)}
           >
             <div className="program-header">
               <GraduationCap size={24} className="program-icon" />

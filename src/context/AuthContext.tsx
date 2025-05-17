@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
+import { BACKEND_URL } from '../constants';
 
 interface AuthContextProps {
   isAuthenticated: boolean;
@@ -19,11 +20,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     localStorage.getItem('isAuthenticated') === 'true'
   );
-  console.log('s')
 
   const login = async (email: string, password: string) => {
-    console.log(123)
-    const res = await fetch('/login', {
+    const res = await fetch(`${BACKEND_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +40,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     setIsAuthenticated(true);
     localStorage.setItem('isAuthenticated', 'true');
-    localStorage.setItem('token', data.token); // если нужно в будущем
+    localStorage.setItem('token', data.access_token); // если нужно в будущем
   };
 
   const logout = () => {

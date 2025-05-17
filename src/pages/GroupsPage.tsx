@@ -7,7 +7,7 @@ import { useGroups } from '../mocks/useGroups';
 const GroupsPage = () => {
   const { programId, curatorId } = useParams();
   const navigate = useNavigate();
-  const groups = useGroups();  // TODO: добавить programId и curatorId в useGroups
+  const groups = useGroups(programId, curatorId);  // TODO: добавить programId и curatorId в useGroups
 
   return (
     <DashboardLayout>
