@@ -1,47 +1,87 @@
 // StudentDetailsPage.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import DashboardLayout from '../layout/DashboardLayout';
 import { Mail, Phone, Calendar, BookOpen, Users, FileText, Edit, List, Check, X } from 'lucide-react';
 import './StudentDetailsPage.css';
 import { useStudentDetail } from '../mocks/useStudentDetail';
 
+interface StudentData {
+  fullName: string;
+  groupId: string;
+  email: string;
+  phone: string;
+  createdAt: string;
+  characteristic?: string;
+}
+
 const StudentDetailsPage = () => {
   const { studentId } = useParams();
   const navigate = useNavigate();
-  const [isEditing, setIsEditing] = useState(false);
-  
-  const student: any = useStudentDetail(studentId || '') 
 
-  const [editData, setEditData] = useState({...student});
+  const student = useStudentDetail(studentId || "") as StudentData;
+  const [isEditing, setIsEditing] = useState(false);
+  const [editData, setEditData] = useState<StudentData>({
+    fullName: '',
+    groupId: '',
+    email: '',
+    phone: '',
+    createdAt: '',
+    characteristic: ''
+  });
+
+  // Инициализация editData при загрузке student
+  useEffect(() => {
+    if (student && Object.keys(student).length > 0) {
+      setEditData({...student});
+    }
+  }, [student]);
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    // setEditData(prev => ({...prev, [name]: value}));
+    setEditData(prev => ({...prev, [name]: value}));
   };
 
   const saveChanges = () => {
-    // Здесь должен быть вызов API для сохранения изменений
-    // setStudent(editData); //TODO: добавить сохранение студентов
+    // TODO: Реализовать вызов API для сохранения изменений
+    console.log('Сохранение данных:', editData);
     setIsEditing(false);
+    // Здесь должен быть fetch/PUT запрос к API
   };
 
   const cancelEditing = () => {
-    setEditData(student);
+    setEditData({...student});
     setIsEditing(false);
   };
 
   const handleSendEmail = () => {
-    // TODO: Логика отправки email добавть
+    window.location.href = `mailto:${student.email}`;
   };
 
   const handleGenerateReport = () => {
-    // TODO: Логика генерации отчета добавить
+    // TODO: Реализовать генерацию отчета
+    console.log('Генерация отчета для студента:', studentId);
   };
 
   const handleViewGrades = () => {
-    // TODO: Переход к просмотру оценок
+    navigate(`/students/${studentId}/grades`);
   };
+
+  if (!studentId) {
+    return (
+      <DashboardLayout>
+        <div className="error-message">ID студента не указан</div>
+      </DashboardLayout>
+    );
+  }
+
+  if (!student || Object.keys(student).length === 0) {
+    return (
+      <DashboardLayout>
+        <div className="loading-message">Загрузка данных студента...</div>
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout>
@@ -58,7 +98,7 @@ const StudentDetailsPage = () => {
       <div className="student-container">
         <div className="student-profile">
           <div className="student-avatar">
-            {student.fullName.charAt(0).toUpperCase()}
+            {student.fullName?.charAt(0)?.toUpperCase() || '?'}
           </div>
           
           <div className="student-info">
@@ -76,7 +116,13 @@ const StudentDetailsPage = () => {
                   onChange={handleEditChange}
                   className="edit-input"
                 />
-                <div className="student-group">Группа: {student.groupId}</div>
+                <input
+                  type="text"
+                  name="groupId"
+                  value={editData.groupId}
+                  onChange={handleEditChange}
+                  className="edit-input"
+                />
               </>
             )}
           </div>
@@ -133,7 +179,7 @@ const StudentDetailsPage = () => {
             ) : (
               <textarea
                 name="characteristic"
-                value={editData.characteristic}
+                value={editData.characteristic || ''}
                 onChange={handleEditChange}
                 className="edit-textarea"
                 rows={4}

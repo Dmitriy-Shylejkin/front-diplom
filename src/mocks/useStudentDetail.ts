@@ -14,7 +14,7 @@ export const useStudentDetail = (studentId: string) => {
       .then((res) => res.json())
       .then(setStudent)
       .catch(console.error);
-  }, []);
+  }, [studentId]);
 
   return student;
 };

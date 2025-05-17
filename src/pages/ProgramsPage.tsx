@@ -7,7 +7,7 @@ import { usePrograms } from '../mocks/usePrograms';
 const ProgramsPage = () => {
   const { facultyId } = useParams();
   const navigate = useNavigate();
-  const programs = usePrograms(facultyId) // TODO: добаить facultyId в usePrograms
+  const programs = usePrograms(facultyId)
 
   return (
     <DashboardLayout>
