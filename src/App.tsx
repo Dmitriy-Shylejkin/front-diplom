@@ -10,6 +10,7 @@ import StudentDetailsPage from './pages/StudentDetailsPage';
 import StudentsGragesPage from  './pages/StudentsGragesPage'
 import CuratorsPage from './pages/CuratorsPage';
 import CuratorProfilePage from './pages/CuratorProfilePage';
+import CuratorDetailsPage from './pages/CuratorDetailsPage';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/student/:studentId" element={<StudentDetailsPage />} />
         <Route path="/student/grades/:studentId" element={<StudentsGragesPage />} />
         <Route path="/curators" element={<CuratorsPage />} />
+        <Route path="/curator/:curatorId" element={<CuratorDetailsPage />} />
         <Route path="/dashboard" element={
           <PrivateRoute>
             <DashboardPage />
