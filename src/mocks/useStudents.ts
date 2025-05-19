@@ -25,7 +25,7 @@ export const useStudents = (groupId: string | undefined = undefined) => {
 export const createStudent = async (newStudent: any) => {
   try {
     console.log('dasdasdaddsad', localStorage.getItem('token'))
-    const response = await fetch('http://192.168.1.68:4000/students', {
+    const response = await fetch(`${BACKEND_URL}/students`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
